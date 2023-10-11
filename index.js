@@ -11,7 +11,7 @@ import productRoutes from "./routes/product.js";
 import transactionRoutes from "./routes/transaction.js";
 import Product from "./models/Product.js";
 import Transaction from "./models/Transaction.js";
-import { kpis, products, transactions } from "../data/data.js";
+import { kpis, products, transactions } from "./data/data.js";
 
 /* CONFIGURATIONS */
 
@@ -48,4 +48,3 @@ mongoose
   })
   .catch((error) => console.log(`${error} did not connect`));
 
-module.exports = app;
