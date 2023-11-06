@@ -6,11 +6,16 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import kpiRoutes from "./routes/kpi.js";
-import KPI from "./models/KPI.js";
 import productRoutes from "./routes/product.js";
 import transactionRoutes from "./routes/transaction.js";
+import surveyRoutes from "./routes/survey.js"
+import rankingRoutes from "./routes/ranking.js"
+import xlsLinesRoutes from "./routes/xlslines.js";
+import XLSLines from "./models/XLSLines.js";
+import KPI from "./models/KPI.js";
 import Product from "./models/Product.js";
 import Transaction from "./models/Transaction.js";
+import Survey from "./models/Survey.js";
 import { kpis, products, transactions } from "./data/data.js";
 
 /* CONFIGURATIONS */
@@ -27,6 +32,9 @@ app.use(cors());
 
 /* ROUTES */
 app.use("/kpi", kpiRoutes);
+app.use("/xlslines", xlsLinesRoutes);
+app.use("/survey", surveyRoutes);
+app.use("/ranking", rankingRoutes);
 app.use("/product", productRoutes);
 app.use("/transaction", transactionRoutes);
 
