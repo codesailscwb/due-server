@@ -34,6 +34,8 @@ const XLSLinesSchema = new Schema(
     question27: { type: Number, },
     question28: { type: Number, },
     question28: { type: Number, },
+    gender: { type: String, },
+    birthdate: { type: String, }
   },
   { timestamps: true }
 );
