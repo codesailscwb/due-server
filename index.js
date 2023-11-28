@@ -43,3 +43,18 @@ mongoose
   })
   .catch((error) => console.log(`${error} did not connect`));
 
+  // setTimeout( () => {
+  //   console.log('Disconnecting from DB...');
+  //   mongoose.disconnect()
+  //   console.log('Exiting...');
+  //   process.exit(0);
+  // }, 10000)
+
+  // const gracefulExit = function() { 
+  //   mongoose.disconnect()
+  //   process.exit(0);
+  // }
+
+  // // If the Node process ends, close the Mongoose connection
+  // process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+

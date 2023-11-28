@@ -6,15 +6,21 @@ const router = express.Router();
 router.get("/rankings", async (req, res) => {
   const { wave, university } = req.query;
   try {
+    let survey = [];
     if (wave & !university) {
-      const survey = await Survey.find({ wave: wave });
+      survey = await Survey.find({ wave: wave });
       res.status(200).json(survey);
     } if (!wave & university){
-      const survey = await Survey.find({ university: university });
+      survey = await Survey.find({ university: university });
       res.status(200).json(survey);
-    } else {
-      const survey = await Survey.find();
-      console.log("survey", survey)
+    } if (wave & university){
+      survey = await Survey.find({ wave: wave, university: university });
+      res.status(200).json(survey);
+    } 
+    else {
+      survey = await Survey.find();
+    }
+    if (survey){
       let categoryRanking = [];
       let waveRanking = [];
       let totalGeneral = [];
@@ -22,7 +28,6 @@ router.get("/rankings", async (req, res) => {
       for (let j = 0; j < survey.length; j++) {
         for(let i = 0; i < survey[j].rows.length; i++) {
           const surveyRow = survey[j].rows[i];
-          
           const studentRanking = {
             totalC1: surveyRow[0].question01 
                     + surveyRow[0].question02
@@ -54,7 +59,7 @@ router.get("/rankings", async (req, res) => {
                     + surveyRow[0].question28 * 3
           }
           categoryRanking.push(studentRanking)
-  
+                   
           totalGeneral = {
             fullName: surveyRow[0].fullName,
             wave: survey[j].wave,
@@ -62,12 +67,14 @@ router.get("/rankings", async (req, res) => {
             categoryRanking: categoryRanking[i],
             total: studentRanking.totalC1 + studentRanking.totalC2 + studentRanking.totalC3
           }
+          
           waveRanking.push(totalGeneral);
         }
       }
       res.status(200).json(waveRanking);
     }
-  } catch (error) {
+    }
+  catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
