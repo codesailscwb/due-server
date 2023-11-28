@@ -9,18 +9,18 @@ router.get("/rankings", async (req, res) => {
     let survey = [];
     if (wave & !university) {
       survey = await Survey.find({ wave: wave });
-      res.status(200).json(survey);
+      
     } if (!wave & university){
       survey = await Survey.find({ university: university });
-      res.status(200).json(survey);
+      
     } if (wave & university){
       survey = await Survey.find({ wave: wave, university: university });
-      res.status(200).json(survey);
+      
     } 
     else {
       survey = await Survey.find();
     }
-    if (survey){
+    if (survey.length != 0){
       let categoryRanking = [];
       let waveRanking = [];
       let totalGeneral = [];
