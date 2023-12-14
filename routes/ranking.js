@@ -64,7 +64,7 @@ router.get("/rankings", async (req, res) => {
             fullName: surveyRow[0].fullName,
             wave: survey[j].wave,
             university: survey[j].university,
-            categoryRanking: categoryRanking[i],
+            categoryRanking: studentRanking,
             total: studentRanking.totalC1 + studentRanking.totalC2 + studentRanking.totalC3
           }
           
